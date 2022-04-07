@@ -1,6 +1,6 @@
-import 'package:atcsearch/ListViewQuality.dart';
+import 'package:atcsearch/Home.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MaterialApp(
-  home: ListViewQuality(),
+  home: Home(),
 ));
