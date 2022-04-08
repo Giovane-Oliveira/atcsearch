@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:atcsearch/Post.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -11,13 +13,21 @@ class ListViewQuality extends StatefulWidget {
 }
 
 class _ListViewQualityState extends State<ListViewQuality> {
-
+  late Future<List<Post>>  _myData = _recuperarPostagens();
   late TextEditingController customer;
   late TextEditingController grade;
 
+
+  @override
+  void initState() {
+    super.initState();
+    customer = TextEditingController();
+    grade = TextEditingController();
+
+  }
   Future<List<Post>> _recuperarPostagens() async {
 
-    String url = "http://192.168.200.11/read.php?tipo=consultar";
+    String url = "http://192.168.200.11/read.php?tipo=consultar&empresa="+ customer.text +"&carga=" + grade.text;
     http.Response response;
     response = await http.get(Uri.parse(url));
     var dadosJson = json.decode(response.body);
@@ -30,14 +40,6 @@ class _ListViewQualityState extends State<ListViewQuality> {
     //print( postagens.toString() );
 
     return postagens;
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    customer = TextEditingController();
-    grade = TextEditingController();
-
   }
 
   @override
@@ -65,6 +67,7 @@ class _ListViewQualityState extends State<ListViewQuality> {
                       child: TextFormField(
                         controller: customer,
                         obscureText: false,
+                        keyboardType:  TextInputType.number,
                         decoration: InputDecoration(
                           isDense: true,
                           hintText: 'Customer',
@@ -94,6 +97,7 @@ class _ListViewQualityState extends State<ListViewQuality> {
                       child: TextFormField(
                         controller: grade,
                         obscureText: false,
+                        keyboardType:  TextInputType.number,
                         decoration: InputDecoration(
                           isDense: true,
                           hintText: 'Grade',
@@ -130,7 +134,9 @@ class _ListViewQualityState extends State<ListViewQuality> {
               children: <Widget>[
                 ElevatedButton.icon(
                   onPressed: () {
-
+                  setState(() {
+                    _myData = _recuperarPostagens();
+                  });
                     // Respond to button press
                   },
                   style: ElevatedButton.styleFrom(
@@ -147,8 +153,8 @@ class _ListViewQualityState extends State<ListViewQuality> {
               child: Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
                 child:
-                FutureBuilder<List<Post>>(
-                  future: _recuperarPostagens(),
+                new  FutureBuilder<List<Post>>(
+                  future:  _myData,
                   builder:  (context, snapshot){
 
                     switch( snapshot.connectionState ){
