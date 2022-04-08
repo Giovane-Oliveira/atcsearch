@@ -60,6 +60,11 @@ flutter:
 
   assets:
     - images/atclogo.jpg
+    - images/fumocru.jpg
+    - images/laboratorio.jpg
+    - images/produtoacabado.jpg
+
+
   # To add assets to your application, add an assets section, like this:
    #assets:
 

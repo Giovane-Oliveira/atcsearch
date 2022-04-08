@@ -1,5 +1,7 @@
+
 import 'dart:ui';
 
+import 'package:atcsearch/ListViewQuality.dart';
 import 'package:flutter/material.dart';
 
 
@@ -16,7 +18,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: Color(0xFF040404),
         automaticallyImplyLeading: false,
         title: Text(
           'ATC Search',
@@ -50,45 +52,79 @@ class _HomeState extends State<Home> {
                     height: 100,
                     fit: BoxFit.fitWidth,
                   ),
-                  Expanded(
-                    child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 100, 0, 0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 100, 0, 0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ClipRRect(
 
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child:
-                            Image.network(
-                              'https://picsum.photos/seed/816/600',
-                              width: 100,
-                              height: 100,
-                              fit: BoxFit.cover,
-                            ),
+                          borderRadius: BorderRadius.circular(10),
+
+                              child: InkWell(
+                                onTap: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) => ListViewQuality(),
+                                  ),
+                                ), // needed
+                                child: Image.asset(
+                                  "images/laboratorio.jpg",
+                                  width: 100,
+                                  height: 100,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+
+                        ),
+
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Image.asset(
+                            'images/produtoacabado.jpg',
+                            width: 100,
+                            height: 100,
+                            fit: BoxFit.cover,
                           ),
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: Image.network(
-                              'https://picsum.photos/seed/941/600',
-                              width: 100,
-                              height: 100,
-                              fit: BoxFit.cover,
-                            ),
+                        ),
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Image.asset(
+                            'images/fumocru.jpg',
+                            width: 100,
+                            height: 100,
+                            fit: BoxFit.cover,
                           ),
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: Image.network(
-                              'https://picsum.photos/seed/925/600',
-                              width: 100,
-                              height: 100,
-                              fit: BoxFit.cover,
-                            ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          '      Quality2',
+
+                        ),
+
+                        Text(
+                          'Produto Acabado',
+
+                        ),
+
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 17, 0),
+                          child: Text(
+                            'Fumo Cru',
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 ],
@@ -100,6 +136,8 @@ class _HomeState extends State<Home> {
     );
   }
 }
+
+
 
 
 
