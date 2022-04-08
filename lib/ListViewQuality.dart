@@ -171,19 +171,25 @@ class _ListViewQualityState extends State<ListViewQuality> {
                         }else {
 
                           print("lista: carregou!! ");
-                          return ListView.builder(
-                              itemCount: snapshot.data?.length,
+                          return ListView.separated(
+                              itemCount: snapshot.data!.length,
                               itemBuilder: (context, index){
 
                                 List<Post> lista = snapshot.data ?? <Post>[];
                                 Post post = lista[index];
 
                                 return ListTile(
-                                  title: Text( "Empresa: " + post.cod_empresa.toString() ),
-                                  subtitle: Text("Carga: " + post.cod_carga.toString() ),
+
+                                  title: new Center(child: new Text("Empresa: " + post.cod_empresa.toString(),)),
+                                  subtitle:  new Center(child: new Text("Carga: " + post.cod_carga.toString(),)),
+                                 /* title: Text( "Empresa: " + post.cod_empresa.toString() ),
+                                  subtitle: Text("Carga: " + post.cod_carga.toString() + "\n Teste: 001" + "\n teste" + "\n teste"),*/
                                 );
 
-                              }
+                              }, separatorBuilder: (BuildContext context, int index) {
+
+                                return Divider();
+                          },
                           );
 
                         }
