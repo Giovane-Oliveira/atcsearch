@@ -23,7 +23,7 @@ class ListViewQuality extends StatefulWidget {
 
 class _ListViewQualityState extends State<ListViewQuality> {
   late Future<List<Post>>  _myData = _recuperarPostagens();
-  late TextEditingController customer;
+  late TextEditingController safra;
   late TextEditingController grade;
 
 
@@ -32,13 +32,13 @@ class _ListViewQualityState extends State<ListViewQuality> {
   @override
   void initState() {
     super.initState();
-    customer = TextEditingController();
+    safra = TextEditingController();
     grade = TextEditingController();
 
     setState(() {
       if(widget.valor != null){
 
-        customer.text = "${widget.valor}";
+        grade.text = "${widget.valor}";
 
       }
 
@@ -47,14 +47,18 @@ class _ListViewQualityState extends State<ListViewQuality> {
   }
   Future<List<Post>> _recuperarPostagens() async {
 
-    String url = "http://192.168.200.11/read.php?tipo=consultar&empresa="+ customer.text +"&carga=" + grade.text;
+    String url = "http://192.168.200.11/read.php?tipo=consultar&safra="+ safra.text +"&grade=" + grade.text;
     http.Response response;
     response = await http.get(Uri.parse(url));
     var dadosJson = json.decode(response.body);
     List<Post> postagens = <Post>[];
     for (var post in dadosJson) {
       // print("post: " + post["cod_carga"] );
-      Post p = Post(post["cod_carga"], post["cod_empresa"]);
+      Post p = Post(post["cod_grade"], post["box_inicial"], post["box_final"], post["box_total"], post["data_processo"],
+          post["umidade"], post["peso_amostra"], post["leitura_nicotina"], post["leitura_acucar"],
+          post["result_nicotina"],
+          post["result_acucar"], post["des_grade"], post["des_pessoa"], post["user_insercao"], post["dt_hr_insercao"],
+          post["user_insercao"], post["dt_hr_alteracao"], post["nic_tipo_calculo"]);
       postagens.add(p);
     }
     //print( postagens.toString() );
@@ -85,12 +89,12 @@ class _ListViewQualityState extends State<ListViewQuality> {
                     child: Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                       child: TextFormField(
-                        controller: customer,
+                        controller: grade,
                         obscureText: false,
                         keyboardType:  TextInputType.number,
                         decoration: InputDecoration(
                           isDense: true,
-                          hintText: 'Customer',
+                          hintText: 'Grade',
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                               color: Colors.black,
@@ -131,12 +135,12 @@ class _ListViewQualityState extends State<ListViewQuality> {
                     child: Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                       child: TextFormField(
-                        controller: grade,
+                        controller: safra,
                         obscureText: false,
                         keyboardType:  TextInputType.number,
                         decoration: InputDecoration(
                           isDense: true,
-                          hintText: 'Grade',
+                          hintText: 'Safra',
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                               color: Colors.black,
@@ -216,8 +220,11 @@ class _ListViewQualityState extends State<ListViewQuality> {
 
                                 return ListTile(
 
-                                  title: new Center(child: new Text("Empresa: " + post.cod_empresa.toString(),)),
-                                  subtitle:  new Center(child: new Text("Carga: " + post.cod_carga.toString(),)),
+                                  title: new Center(child: new Text("COD_GRADE: " + post.cod_grade.toString(),)),
+                                  subtitle: Text("BOX_INICIAL: " + post.box_inicial.toString() + "\t BOX_FINAL: " + post.box_final.toString() + "\t"
+                                  + "BOX_TOTAL:" + post.box_total.toString() + "\t DATA_PROCESSO: " + post.data_processo.toString() + "\n"),
+
+                                  // subtitle:  new Center(child: new Text("Carga: " + post.cod_carga.toString(),)),
                                  /* title: Text( "Empresa: " + post.cod_empresa.toString() ),
                                   subtitle: Text("Carga: " + post.cod_carga.toString() + "\n Teste: 001" + "\n teste" + "\n teste"),*/
                                 );

@@ -25,20 +25,22 @@ class _ConsultaCostumerState extends State<ConsultaCostumer> {
   @override
   void initState() {
     super.initState();
-    customer = TextEditingController();
     grade = TextEditingController();
 
   }
   Future<List<Post>> _recuperarPostagens() async {
 
-    String url = "http://192.168.200.11/read.php?tipo=customer&empresa=0&carga=0";
+    String url = "http://192.168.200.11/read.php?tipo=consultar&grade=" + grade.text;
     http.Response response;
     response = await http.get(Uri.parse(url));
     var dadosJson = json.decode(response.body);
     List<Post> postagens = <Post>[];
     for (var post in dadosJson) {
       // print("post: " + post["cod_carga"] );
-      Post p = Post(post["cod_carga"], post["cod_empresa"]);
+      Post p = Post(post["cod_grade"], post["box_inicial"], post["box_final"], post["box_total"], post["data_processo"],
+          post["umidade"], post["peso_amostra"], post["leitura_nicotina"], post["leitura_acucar"], post["result_nicotina"],
+          post["result_acucar"], post["des_grade"], post["des_pessoa"], post["user_insercao"], post["dt_hr_insercao"],
+          post["user_insercao"], post["dt_hr_alteracao"], post["nic_tipo_calculo"]);
       postagens.add(p);
     }
     //print( postagens.toString() );
@@ -69,7 +71,7 @@ class _ConsultaCostumerState extends State<ConsultaCostumer> {
                     child: Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(60, 0, 60, 0),
                       child: TextFormField(
-                        controller: customer,
+                        controller: grade,
                         obscureText: false,
                         keyboardType:  TextInputType.number,
                         decoration: InputDecoration(
@@ -161,14 +163,14 @@ class _ConsultaCostumerState extends State<ConsultaCostumer> {
                                 Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(
-                                    builder: (context) => ListViewQuality(valor: post.cod_empresa.toString(),)
+                                    builder: (context) => ListViewQuality(valor: post.cod_grade.toString(),)
                                 )
                                 );
 
                               },
 
-                                title: new Center(child: new Text("Empresa: " + post.cod_empresa.toString(),)),
-                                subtitle:  new Center(child: new Text("Carga: " + post.cod_carga.toString(),)),
+                                title: new Center(child: new Text("Empresa: " + post.cod_grade.toString(),)),
+                                subtitle:  new Center(child: new Text("Carga: " + post.box_inicial.toString(),)),
                                 /* title: Text( "Empresa: " + post.cod_empresa.toString() ),
                                   subtitle: Text("Carga: " + post.cod_carga.toString() + "\n Teste: 001" + "\n teste" + "\n teste"),*/
                               );
