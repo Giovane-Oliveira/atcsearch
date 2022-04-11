@@ -190,28 +190,128 @@ class _ListViewQualityState extends State<ListViewQuality> {
             ),
 
             Expanded(
-              child: Padding(
+              child: SingleChildScrollView(
+                 scrollDirection: Axis.vertical,                                            //https://stackoverflow.com/questions/55299332/make-datatable-scroll-bidirectional-in-flutter
+    child: SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+
+      child: Column(
+          children: [
+            FutureBuilder<List<Post>>(
+              initialData: const <Post>[],
+              future: _myData,
+              builder: (context, snapshot)
+
+              /*Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
                 child:
                 new  FutureBuilder<List<Post>>(
                   future:  _myData,
-                  builder:  (context, snapshot){
+                  builder:  (context, snapshot)*/{
 
-                    switch( snapshot.connectionState ){
-                      case ConnectionState.none :
-                      case ConnectionState.waiting :
-                        return Center(
-                          child: CircularProgressIndicator(),
-                        );
-                        break;
-                      case ConnectionState.active :
-                      case ConnectionState.done :
-                        if( snapshot.hasError ){
-                          print("lista: Erro ao carregar $snapshot");
-                        }else {
+                switch( snapshot.connectionState ){
+                  case ConnectionState.none :
+                  case ConnectionState.waiting :
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                    break;
+                  case ConnectionState.active :
+                  case ConnectionState.done :
+                    if( snapshot.hasError ){
+                      print("lista: Erro ao carregar $snapshot");
+                    }else {
 
-                          print("lista: carregou!! ");
-                          return ListView.separated(
+                      print("lista: carregou!! ");
+
+                      return DataTable(
+                        columns: const [
+                         // DataColumn(label: Text('COD_GRADE')),
+                          DataColumn(label: Text('BOX_INICIAL')),
+                          DataColumn(label: Text('BOX_FINAL')),
+                          DataColumn(label: Text('BOX_TOTAL')),
+                          DataColumn(label: Text('DATA_PROCESSO')),
+                          DataColumn(label: Text('UMIDADE')),
+                          DataColumn(label: Text('PESO_AMOSTRA')),
+                          DataColumn(label: Text('LEITURA_NICOTINA')),
+                          DataColumn(label: Text('LEITURA_ACUCAR')),
+                          DataColumn(label: Text('RESULT_NICOTINA')),
+                          DataColumn(label: Text('RESULT_ACUCAR')),
+                          DataColumn(label: Text('DES_GRADE')),
+                          DataColumn(label: Text('DES_PESSOA')),
+                          DataColumn(label: Text('USER_INSERCAO')),
+                          DataColumn(label: Text('DT_HR_INSERCAO')),
+                          DataColumn(label: Text('USER_ALTERACAO')),
+                          DataColumn(label: Text('DT_HR_INSERCAO')),
+                          DataColumn(label: Text('NIC_TIPO_CALCULO')),
+                        ],
+                        rows: List.generate(
+                          snapshot.data!.length,
+                              (index) {
+                            var emp = snapshot.data![index];
+                            return DataRow(cells: [
+                             /* DataCell(
+                                Text(emp.cod_grade.toString()),
+                              ),*/
+                              DataCell(
+                                Text(emp.box_inicial.toString()),
+                              ),
+                              DataCell(
+                                Text(emp.box_final.toString()),
+                              ),
+                              DataCell(
+                                Text(emp.box_total.toString()),
+                              ),
+                              DataCell(
+                                Text(emp.data_processo.toString()),
+                              ),
+                              DataCell(
+                                Text(emp.umidade.toString()),
+                              ),
+                              DataCell(
+                                Text(emp.peso_amostra.toString()),
+                              ),
+                              DataCell(
+                                Text(emp.leitura_nicotina.toString()),
+                              ),
+                              DataCell(
+                                Text(emp.leitura_acucar.toString()),
+                              ),
+                              DataCell(
+                                Text(emp.result_nicotina.toString()),
+                              ),
+                              DataCell(
+                                Text(emp.result_acucar.toString()),
+                              ),
+                              DataCell(
+                                Text(emp.des_grade.toString()),
+                              ),
+                              DataCell(
+                                Text(emp.des_pessoa.toString()),
+                              ),
+                              DataCell(
+                                Text(emp.user_insercao.toString()),
+                              ),
+                              DataCell(
+                                Text(emp.dt_hr_insercao.toString()),
+                              ),
+
+                              DataCell(
+                                Text(emp.dt_hr_insercao.toString()),
+                              ),
+                              DataCell(
+                                Text(emp.user_alteracao.toString()),
+                              ),
+                              DataCell(
+                                Text(emp.nic_tipo_calculo.toString()),
+                              ),
+                            ]);
+                          },
+                        ).toList(),
+                      );
+
+
+                      /* return ListView.separated(
                               itemCount: snapshot.data!.length,
                               itemBuilder: (context, index){
 
@@ -233,16 +333,22 @@ class _ListViewQualityState extends State<ListViewQuality> {
 
                                 return Divider();
                           },
-                          );
+                          );*/
 
-                        }
-                        break;
                     }
-                    return Container();
-                  },
-                ),
-              ),
+                    break;
+                }
+                return Container();
+              },
             ),
+          ]),
+
+    ),                         //https://flutterhq.com/questions-and-answers/1284/how-to-create-rows-data-in-to-datatable-using-from-json-model-json-api-respons-flutter
+
+    ),
+    ),
+
+
 
                 /**/
 
