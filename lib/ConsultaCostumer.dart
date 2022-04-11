@@ -1,4 +1,4 @@
-import 'dart:io';
+
 import 'dart:ui';
 
 import 'package:atcsearch/Home.dart';
@@ -8,25 +8,18 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:async';
 
-import 'ConsultaCostumer.dart';
+import 'ListViewQuality.dart';
 
-class ListViewQuality extends StatefulWidget {
-  String? valor;
-
-  ListViewQuality({this.valor});
-
-
+class ConsultaCostumer extends StatefulWidget {
   @override
-  _ListViewQualityState createState() => _ListViewQualityState();
+  _ConsultaCostumerState createState() => _ConsultaCostumerState();
 
 }
 
-class _ListViewQualityState extends State<ListViewQuality> {
+class _ConsultaCostumerState extends State<ConsultaCostumer> {
   late Future<List<Post>>  _myData = _recuperarPostagens();
   late TextEditingController customer;
   late TextEditingController grade;
-
-
 
 
   @override
@@ -35,19 +28,10 @@ class _ListViewQualityState extends State<ListViewQuality> {
     customer = TextEditingController();
     grade = TextEditingController();
 
-    setState(() {
-      if(widget.valor != null){
-
-        customer.text = "${widget.valor}";
-
-      }
-
-    });
-
   }
   Future<List<Post>> _recuperarPostagens() async {
 
-    String url = "http://192.168.200.11/read.php?tipo=consultar&empresa="+ customer.text +"&carga=" + grade.text;
+    String url = "http://192.168.200.11/read.php?tipo=customer&empresa=0&carga=0";
     http.Response response;
     response = await http.get(Uri.parse(url));
     var dadosJson = json.decode(response.body);
@@ -66,7 +50,7 @@ class _ListViewQualityState extends State<ListViewQuality> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Nicotine and Sugar"),
+        title: Text("Search Customer"),
         backgroundColor: Colors.black,
       ),
       body:
@@ -83,7 +67,7 @@ class _ListViewQualityState extends State<ListViewQuality> {
                 children: [
                   Expanded(
                     child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                      padding: EdgeInsetsDirectional.fromSTEB(60, 0, 60, 0),
                       child: TextFormField(
                         controller: customer,
                         obscureText: false,
@@ -110,69 +94,25 @@ class _ListViewQualityState extends State<ListViewQuality> {
                       ),
                     ),
                   ),
-                  Expanded(
 
-                    child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 110, 0),
-                     child:  IconButton(
-                        iconSize: 30,
-                        icon: Icon(Icons.search),
-                        onPressed: () => Navigator.pushReplacement(
-                        context,
-                         MaterialPageRoute(
-                           builder: (_) => ConsultaCostumer(),
-                                          ),
-                      ),
-                    ),
-                   ),
-                  ),
 
-                  Expanded(
-                    child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                      child: TextFormField(
-                        controller: grade,
-                        obscureText: false,
-                        keyboardType:  TextInputType.number,
-                        decoration: InputDecoration(
-                          isDense: true,
-                          hintText: 'Grade',
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.black,
-                              width: 1,
-                            ),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.black,
-                              width: 1,
-                            ),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
 
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ),
 
                 ],
               ),
 
             ),
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.end,
+            Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.end,
 
               children: <Widget>[
                 ElevatedButton.icon(
                   onPressed: () {
-                  setState(() {
-                    _myData = _recuperarPostagens();
-                  });
+                    setState(() {
+                      _myData = _recuperarPostagens();
+                    });
                     // Respond to button press
                   },
                   style: ElevatedButton.styleFrom(
@@ -208,23 +148,34 @@ class _ListViewQualityState extends State<ListViewQuality> {
 
                           print("lista: carregou!! ");
                           return ListView.separated(
-                              itemCount: snapshot.data!.length,
-                              itemBuilder: (context, index){
+                            itemCount: snapshot.data!.length,
+                            itemBuilder: (context, index){
 
-                                List<Post> lista = snapshot.data ?? <Post>[];
-                                Post post = lista[index];
+                              List<Post> lista = snapshot.data ?? <Post>[];
+                              Post post = lista[index];
 
-                                return ListTile(
+                              return ListTile(
 
-                                  title: new Center(child: new Text("Empresa: " + post.cod_empresa.toString(),)),
-                                  subtitle:  new Center(child: new Text("Carga: " + post.cod_carga.toString(),)),
-                                 /* title: Text( "Empresa: " + post.cod_empresa.toString() ),
-                                  subtitle: Text("Carga: " + post.cod_carga.toString() + "\n Teste: 001" + "\n teste" + "\n teste"),*/
+                              onTap: () {
+
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                    builder: (context) => ListViewQuality(valor: post.cod_empresa.toString(),)
+                                )
                                 );
 
-                              }, separatorBuilder: (BuildContext context, int index) {
+                              },
 
-                                return Divider();
+                                title: new Center(child: new Text("Empresa: " + post.cod_empresa.toString(),)),
+                                subtitle:  new Center(child: new Text("Carga: " + post.cod_carga.toString(),)),
+                                /* title: Text( "Empresa: " + post.cod_empresa.toString() ),
+                                  subtitle: Text("Carga: " + post.cod_carga.toString() + "\n Teste: 001" + "\n teste" + "\n teste"),*/
+                              );
+
+                            }, separatorBuilder: (BuildContext context, int index) {
+
+                            return Divider();
                           },
                           );
 
@@ -237,11 +188,11 @@ class _ListViewQualityState extends State<ListViewQuality> {
               ),
             ),
 
-                /**/
+            /**/
 
 
 
-    ]),
+          ]),
     );
   }
 }
@@ -249,7 +200,7 @@ class _ListViewQualityState extends State<ListViewQuality> {
 
 
 
-     /* FutureBuilder<List<Post>>(
+/* FutureBuilder<List<Post>>(
         future: _recuperarPostagens(),
         builder:  (context, snapshot){
 
