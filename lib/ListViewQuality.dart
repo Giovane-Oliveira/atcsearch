@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'dart:ui';
 
-import 'package:atcsearch/Home.dart';
 import 'package:atcsearch/Post.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -87,7 +86,8 @@ class _ListViewQualityState extends State<ListViewQuality> {
                 children: [
                   Expanded(
                     child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 5, 0),
+                    child: GestureDetector(
                       child: TextFormField(
                         controller: grade,
                         obscureText: false,
@@ -112,28 +112,56 @@ class _ListViewQualityState extends State<ListViewQuality> {
                         ),
                         textAlign: TextAlign.center,
                       ),
-                    ),
-                  ),
-                  Expanded(
-
-                    child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 110, 0),
-                     child:  IconButton(
-                        iconSize: 30,
-                        icon: Icon(Icons.search),
-                        onPressed: () => Navigator.pushReplacement(
-                        context,
-                         MaterialPageRoute(
-                           builder: (_) => ConsultaCostumer(),
-                                          ),
+                        onDoubleTap: () => Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => ConsultaCostumer(),
+                          ),
+                        ),
                       ),
                     ),
-                   ),
                   ),
+                /*  Expanded(
 
+                    child: Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(10, 0, 110, 0),
+                     child: GestureDetector(
+                       child: Container(
+                         //color: Colors.yellow,
+                         width: 80.0,
+                         height: 40.0,
+                         child: Icon(Icons.search, size: 30,),
+                       ),
+                       onTap: () {
+
+                         Navigator.pushReplacement(
+                           context,
+                           MaterialPageRoute(
+                             builder: (_) => ConsultaCostumer(),
+                           ),
+                         );
+
+                       },
+                     ),
+
+
+
+                      /*IconButton(
+                        iconSize: 30,
+                        icon: Icon(Icons.search),
+                        onPressed: (){ Navigator.pushReplacement(
+                                                             context,
+                                                 MaterialPageRoute(
+                                                   builder: (_) => ConsultaCostumer(),
+                                               ),
+                                                   );
+                                               }
+                   ),*/
+                  ),
+                  ),*/
                   Expanded(
                     child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                      padding: EdgeInsetsDirectional.fromSTEB(5, 0, 0, 0),
                       child: TextFormField(
                         controller: safra,
                         obscureText: false,
