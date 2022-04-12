@@ -1,8 +1,8 @@
 
 import 'dart:ui';
 
+import 'package:atcsearch/Grade.dart';
 import 'package:atcsearch/Home.dart';
-import 'package:atcsearch/Post.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -17,7 +17,7 @@ class ConsultaCostumer extends StatefulWidget {
 }
 
 class _ConsultaCostumerState extends State<ConsultaCostumer> {
-  late Future<List<Post>>  _myData = _recuperarPostagens();
+  late Future<List<Grade>>  _myData = _recuperarPostagens();
   late TextEditingController customer;
   late TextEditingController grade;
 
@@ -28,19 +28,23 @@ class _ConsultaCostumerState extends State<ConsultaCostumer> {
     grade = TextEditingController();
 
   }
-  Future<List<Post>> _recuperarPostagens() async {
+  Future<List<Grade>> _recuperarPostagens() async {
+    String url =  "http://192.168.200.11/read.php?tipo=grade";
 
-    String url = "http://192.168.200.11/read.php?tipo=consultar&grade=" + grade.text;
+    if(!grade.text.isEmpty){
+
+     url = "http://192.168.200.11/read.php?tipo=grade&grade=" + grade.text;
+
+    }
+
+
     http.Response response;
     response = await http.get(Uri.parse(url));
     var dadosJson = json.decode(response.body);
-    List<Post> postagens = <Post>[];
+    List<Grade> postagens = <Grade>[];
     for (var post in dadosJson) {
       // print("post: " + post["cod_carga"] );
-      Post p = Post(post["cod_grade"], post["box_inicial"], post["box_final"], post["box_total"], post["data_processo"],
-          post["umidade"], post["peso_amostra"], post["leitura_nicotina"], post["leitura_acucar"], post["result_nicotina"],
-          post["result_acucar"], post["des_grade"], post["des_pessoa"], post["user_insercao"], post["dt_hr_insercao"],
-          post["user_insercao"], post["dt_hr_alteracao"], post["nic_tipo_calculo"]);
+      Grade p = Grade(post["cod_grade"], post["des_grade"], post["cod_cliente"], post["sample"]);
       postagens.add(p);
     }
     //print( postagens.toString() );
@@ -76,7 +80,7 @@ class _ConsultaCostumerState extends State<ConsultaCostumer> {
                         keyboardType:  TextInputType.number,
                         decoration: InputDecoration(
                           isDense: true,
-                          hintText: 'Customer',
+                          hintText: 'Grade',
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                               color: Colors.black,
@@ -131,7 +135,7 @@ class _ConsultaCostumerState extends State<ConsultaCostumer> {
               child: Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
                 child:
-                new  FutureBuilder<List<Post>>(
+                FutureBuilder<List<Grade>>(
                   future:  _myData,
                   builder:  (context, snapshot){
 
@@ -153,8 +157,8 @@ class _ConsultaCostumerState extends State<ConsultaCostumer> {
                             itemCount: snapshot.data!.length,
                             itemBuilder: (context, index){
 
-                              List<Post> lista = snapshot.data ?? <Post>[];
-                              Post post = lista[index];
+                              List<Grade> lista = snapshot.data ?? <Grade>[];
+                              Grade post = lista[index];
 
                               return ListTile(
 
@@ -169,8 +173,9 @@ class _ConsultaCostumerState extends State<ConsultaCostumer> {
 
                               },
 
-                                title: new Center(child: new Text("Empresa: " + post.cod_grade.toString(),)),
-                                subtitle:  new Center(child: new Text("Carga: " + post.box_inicial.toString(),)),
+                                title: new Center(child: new Text("COD_GRADE: " + post.cod_grade.toString(),)),
+                                subtitle:  new Center(child: new Text("DES_GRADE: " + post.des_grade + "\n COD_CLIENTE: "
+                                  + post.cod_cliente.toString() + "\n SAMPLE: " + post.sample, textAlign: TextAlign.center)),
                                 /* title: Text( "Empresa: " + post.cod_empresa.toString() ),
                                   subtitle: Text("Carga: " + post.cod_carga.toString() + "\n Teste: 001" + "\n teste" + "\n teste"),*/
                               );

@@ -277,6 +277,7 @@ class _ListViewQualityState extends State<ListViewQuality> {
                               DataCell(
                                 Text(emp.leitura_acucar.toString()),
                               ),
+
                               DataCell(
                                 Text(emp.result_nicotina.toString()),
                               ),
