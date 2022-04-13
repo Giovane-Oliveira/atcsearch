@@ -1,8 +1,8 @@
 
 import 'dart:ui';
 
-import '../Grade.dart';
-import '../NicotineAndSugar.dart';
+import 'package:atcsearch/Quality2/Grade.dart';
+import 'package:atcsearch/Quality2/NicotineAndSugar.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -38,6 +38,10 @@ class _ConsultaCostumerState extends State<ConsultaCostumer> {
     }else if(!grade.text.isEmpty){
 
       url = "http://192.168.200.11/read.php?tipo=grade&grade=" + grade.text;
+
+    }else if(!safra.text.isEmpty){
+
+      url = "http://192.168.200.11/read.php?tipo=safra&safra=" + safra.text;
 
     }
 
