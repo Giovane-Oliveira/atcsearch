@@ -18,7 +18,7 @@ class ConsultaCostumer extends StatefulWidget {
 
 class _ConsultaCostumerState extends State<ConsultaCostumer> {
   late Future<List<Grade>>  _myData = _recuperarPostagens();
-  late TextEditingController customer;
+  late TextEditingController safra;
   late TextEditingController grade;
 
 
@@ -26,14 +26,15 @@ class _ConsultaCostumerState extends State<ConsultaCostumer> {
   void initState() {
     super.initState();
     grade = TextEditingController();
+    safra = TextEditingController();
 
   }
   Future<List<Grade>> _recuperarPostagens() async {
     String url =  "http://192.168.200.11/read.php?tipo=grade";
 
-    if(!grade.text.isEmpty){
+    if(!grade.text.isEmpty && !safra.text.isEmpty){
 
-     url = "http://192.168.200.11/read.php?tipo=grade&grade=" + grade.text;
+     url = "http://192.168.200.11/read.php?tipo=grade&grade=" + grade.text + "&safra=" + safra.text;
 
     }
 
@@ -44,7 +45,7 @@ class _ConsultaCostumerState extends State<ConsultaCostumer> {
     List<Grade> postagens = <Grade>[];
     for (var post in dadosJson) {
       // print("post: " + post["cod_carga"] );
-      Grade p = Grade(post["cod_grade"], post["des_grade"], post["cod_cliente"], post["sample"]);
+      Grade p = Grade(post["crop"],post["cod_grade"], post["des_grade"], post["cod_cliente"], post["sample"]);
       postagens.add(p);
     }
     //print( postagens.toString() );
@@ -65,7 +66,7 @@ class _ConsultaCostumerState extends State<ConsultaCostumer> {
           mainAxisSize: MainAxisSize.max,
           children: [
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(16, 10, 16, 0),
+              padding: EdgeInsetsDirectional.fromSTEB(0, 10, 16, 0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -73,7 +74,7 @@ class _ConsultaCostumerState extends State<ConsultaCostumer> {
                 children: [
                   Expanded(
                     child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(60, 0, 60, 0),
+                      padding: EdgeInsetsDirectional.fromSTEB(2, 0, 5, 0),
                       child: TextFormField(
                         controller: grade,
                         obscureText: false,
@@ -101,7 +102,35 @@ class _ConsultaCostumerState extends State<ConsultaCostumer> {
                     ),
                   ),
 
-
+                  Expanded(
+                    child: Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(2, 0, 5, 0),
+                      child: TextFormField(
+                        controller: safra,
+                        obscureText: false,
+                        keyboardType:  TextInputType.number,
+                        decoration: InputDecoration(
+                          isDense: true,
+                          hintText: 'Safra',
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.black,
+                              width: 1,
+                            ),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.black,
+                              width: 1,
+                            ),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
 
 
                 ],
@@ -167,14 +196,14 @@ class _ConsultaCostumerState extends State<ConsultaCostumer> {
                                 Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(
-                                    builder: (context) => ListViewQuality(valor: post.cod_grade.toString(),)
+                                    builder: (context) => ListViewQuality(valor: post.cod_grade.toString(), valor1: post.des_grade, valor2: post.crop.toString(),)
                                 )
                                 );
 
                               },
 
                                 title: new Center(child: new Text("COD_GRADE: " + post.cod_grade.toString(),)),
-                                subtitle:  new Center(child: new Text("DES_GRADE: " + post.des_grade + "\n COD_CLIENTE: "
+                                subtitle:  new Center(child: new Text("SAFRA:" + post.crop.toString() +"\n GRADE: " + post.des_grade + "\n COD_CLIENTE: "
                                   + post.cod_cliente.toString() + "\n SAMPLE: " + post.sample, textAlign: TextAlign.center)),
                                 /* title: Text( "Empresa: " + post.cod_empresa.toString() ),
                                   subtitle: Text("Carga: " + post.cod_carga.toString() + "\n Teste: 001" + "\n teste" + "\n teste"),*/

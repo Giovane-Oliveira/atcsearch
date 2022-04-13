@@ -1,4 +1,5 @@
-import 'dart:io';
+
+
 import 'dart:ui';
 
 import 'package:atcsearch/Post.dart';
@@ -10,9 +11,9 @@ import 'dart:async';
 import 'ConsultaCostumer.dart';
 
 class ListViewQuality extends StatefulWidget {
-  String? valor;
+  String? valor, valor1, valor2;
 
-  ListViewQuality({this.valor});
+  ListViewQuality({this.valor, this.valor1, this.valor2});
 
 
   @override
@@ -21,7 +22,7 @@ class ListViewQuality extends StatefulWidget {
 }
 
 class _ListViewQualityState extends State<ListViewQuality> {
-  late Future<List<Post>>  _myData = _recuperarPostagens();
+  late Future<List<Post>>  _myData = _recuperarPostagens(0);
   late TextEditingController safra;
   late TextEditingController grade;
 
@@ -38,13 +39,30 @@ class _ListViewQualityState extends State<ListViewQuality> {
       if(widget.valor != null){
 
         grade.text = "${widget.valor}";
+        safra.text = "${widget.valor2}";
+
+        //Consultar banco de dados
+
+
+
+
+
+      }else{
+
+        widget.valor1 = "Clique duas vezes na caixa de texto";
 
       }
 
     });
 
   }
-  Future<List<Post>> _recuperarPostagens() async {
+
+
+
+
+
+  Future<List<Post>> _recuperarPostagens(int n) async {
+
 
     String url = "http://192.168.200.11/read.php?tipo=consultar&safra="+ safra.text +"&grade=" + grade.text;
     http.Response response;
@@ -53,11 +71,10 @@ class _ListViewQualityState extends State<ListViewQuality> {
     List<Post> postagens = <Post>[];
     for (var post in dadosJson) {
       // print("post: " + post["cod_carga"] );
-      Post p = Post(post["cod_grade"], post["box_inicial"], post["box_final"], post["box_total"], post["data_processo"],
+      Post p = Post(post["data_processo"], post["box_inicial"], post["box_final"],
           post["umidade"], post["peso_amostra"], post["leitura_nicotina"], post["leitura_acucar"],
           post["result_nicotina"],
-          post["result_acucar"], post["des_grade"], post["des_pessoa"], post["user_insercao"], post["dt_hr_insercao"],
-          post["user_insercao"], post["dt_hr_alteracao"], post["nic_tipo_calculo"]);
+          post["result_acucar"]);
       postagens.add(p);
     }
     //print( postagens.toString() );
@@ -77,8 +94,26 @@ class _ListViewQualityState extends State<ListViewQuality> {
       Column(
           mainAxisSize: MainAxisSize.max,
           children: [
+
+      Padding(
+      padding: EdgeInsetsDirectional.fromSTEB(0, 10, 16, 0),
+      child: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+                "Grade: ${widget.valor1}",
+              style: TextStyle(
+                fontSize: 15,
+              ),
+            ),
+          ]
+            ),
+      ),
+
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(16, 10, 16, 0),
+              padding: EdgeInsetsDirectional.fromSTEB(0, 10, 16, 0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -86,7 +121,7 @@ class _ListViewQualityState extends State<ListViewQuality> {
                 children: [
                   Expanded(
                     child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 5, 0),
+                      padding: EdgeInsetsDirectional.fromSTEB(2, 0, 5, 0),
                     child: GestureDetector(
                       child: TextFormField(
                         controller: grade,
@@ -111,6 +146,8 @@ class _ListViewQualityState extends State<ListViewQuality> {
                           ),
                         ),
                         textAlign: TextAlign.center,
+                        cursorColor: Colors.black,
+
                       ),
                         onDoubleTap: () => Navigator.pushReplacement(
                           context,
@@ -186,14 +223,14 @@ class _ListViewQualityState extends State<ListViewQuality> {
                         ),
 
                         textAlign: TextAlign.center,
+                        cursorColor: Colors.black,
                       ),
                     ),
                   ),
-
                 ],
               ),
-
             ),
+          
           Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -203,7 +240,7 @@ class _ListViewQualityState extends State<ListViewQuality> {
                 ElevatedButton.icon(
                   onPressed: () {
                   setState(() {
-                    _myData = _recuperarPostagens();
+                    _myData = _recuperarPostagens(0);
                   });
                     // Respond to button press
                   },
@@ -255,23 +292,23 @@ class _ListViewQualityState extends State<ListViewQuality> {
                       return DataTable(
                         columns: const [
                          // DataColumn(label: Text('COD_GRADE')),
-                          DataColumn(label: Text('BOX_INICIAL')),
-                          DataColumn(label: Text('BOX_FINAL')),
-                          DataColumn(label: Text('BOX_TOTAL')),
-                          DataColumn(label: Text('DATA_PROCESSO')),
-                          DataColumn(label: Text('UMIDADE')),
-                          DataColumn(label: Text('PESO_AMOSTRA')),
-                          DataColumn(label: Text('LEITURA_NICOTINA')),
-                          DataColumn(label: Text('LEITURA_ACUCAR')),
-                          DataColumn(label: Text('RESULT_NICOTINA')),
-                          DataColumn(label: Text('RESULT_ACUCAR')),
-                          DataColumn(label: Text('DES_GRADE')),
+                          DataColumn(label: Text('Date')),
+                          DataColumn(label: Text('Case First')),
+                          DataColumn(label: Text('Case Last')),
+                         // DataColumn(label: Text('BOX_TOTAL')),
+                          DataColumn(label: Text('Moisture')),
+                          DataColumn(label: Text('Weight')),
+                          DataColumn(label: Text('Read Nicotine mg/mL')),
+                          DataColumn(label: Text('Read Sugar mg/mL')),
+                          DataColumn(label: Text('Result_Nicotine %')),
+                          DataColumn(label: Text('Result_Sugar %')),
+                       /*  DataColumn(label: Text('DES_GRADE')),
                           DataColumn(label: Text('DES_PESSOA')),
                           DataColumn(label: Text('USER_INSERCAO')),
                           DataColumn(label: Text('DT_HR_INSERCAO')),
                           DataColumn(label: Text('USER_ALTERACAO')),
                           DataColumn(label: Text('DT_HR_INSERCAO')),
-                          DataColumn(label: Text('NIC_TIPO_CALCULO')),
+                          DataColumn(label: Text('NIC_TIPO_CALCULO')),*/
                         ],
                         rows: List.generate(
                           snapshot.data!.length,
@@ -282,17 +319,18 @@ class _ListViewQualityState extends State<ListViewQuality> {
                                 Text(emp.cod_grade.toString()),
                               ),*/
                               DataCell(
+                                Text(emp.data_processo.toString()),
+                              ),
+                              DataCell(
                                 Text(emp.box_inicial.toString()),
                               ),
                               DataCell(
                                 Text(emp.box_final.toString()),
                               ),
-                              DataCell(
+                             /* DataCell(
                                 Text(emp.box_total.toString()),
-                              ),
-                              DataCell(
-                                Text(emp.data_processo.toString()),
-                              ),
+                              ),*/
+
                               DataCell(
                                 Text(emp.umidade.toString()),
                               ),
@@ -312,7 +350,7 @@ class _ListViewQualityState extends State<ListViewQuality> {
                               DataCell(
                                 Text(emp.result_acucar.toString()),
                               ),
-                              DataCell(
+                            /*  DataCell(
                                 Text(emp.des_grade.toString()),
                               ),
                               DataCell(
@@ -333,7 +371,7 @@ class _ListViewQualityState extends State<ListViewQuality> {
                               ),
                               DataCell(
                                 Text(emp.nic_tipo_calculo.toString()),
-                              ),
+                              ),*/
                             ]);
                           },
                         ).toList(),
