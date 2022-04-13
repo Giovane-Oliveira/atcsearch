@@ -27,7 +27,7 @@ class _NicotineAndSugarState extends State<NicotineAndSugar> {
     super.initState();
     safra = TextEditingController();
     grade = TextEditingController();
-
+    // safra.text = "2022";
     setState(() {
       if (widget.valor != null) {
         grade.text = "${widget.valor}";
@@ -104,6 +104,7 @@ class _NicotineAndSugarState extends State<NicotineAndSugar> {
                   padding: EdgeInsetsDirectional.fromSTEB(2, 0, 5, 0),
                   child: GestureDetector(
                     child: TextFormField(
+                      readOnly: true,
                       controller: grade,
                       obscureText: false,
                       keyboardType: TextInputType.number,
