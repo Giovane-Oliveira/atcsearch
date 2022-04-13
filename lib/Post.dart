@@ -1,18 +1,15 @@
-class Post{
-
+class Post {
   Post(
-
-      this._data_processo,
-      this._box_inicial,
-      this._box_final,
-      this._umidade,
-      this._peso_amostra,
-      this._leitura_nicotina,
-      this._leitura_acucar,
-      this._result_nicotina,
-      this._result_acucar,
-     );
-
+    this._data_processo,
+    this._box_inicial,
+    this._box_final,
+    this._umidade,
+    this._peso_amostra,
+    this._leitura_nicotina,
+    this._leitura_acucar,
+    this._result_nicotina,
+    this._result_acucar,
+  );
 
   String? _data_processo;
   int _box_inicial;
@@ -23,7 +20,6 @@ class Post{
   String? _leitura_acucar;
   String? _result_nicotina;
   String? _result_acucar;
-
 
   int get box_inicial => _box_inicial;
 
@@ -36,8 +32,6 @@ class Post{
   set box_final(int value) {
     _box_final = value;
   }
-
-
 
   String? get data_processo => _data_processo;
 
@@ -80,6 +74,4 @@ class Post{
   set result_acucar(String? value) {
     _result_acucar = value;
   }
-
-
 }

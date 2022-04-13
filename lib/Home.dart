@@ -1,9 +1,7 @@
-
 import 'dart:ui';
 
-import 'package:atcsearch/ListViewQuality.dart';
+import 'package:atcsearch/Quality2/NicotineAndSugar.dart';
 import 'package:flutter/material.dart';
-
 
 class Home extends StatefulWidget {
   @override
@@ -11,7 +9,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,26 +55,22 @@ class _HomeState extends State<Home> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         ClipRRect(
-
                           borderRadius: BorderRadius.circular(10),
-
-                              child: InkWell(
-                                onTap: () => Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (_) => ListViewQuality(),
-                                  ),
-                                ), // needed
-                                child: Image.asset(
-                                  "images/laboratorio.jpg",
-                                  width: 100,
-                                  height: 100,
-                                  fit: BoxFit.cover,
-                                ),
+                          child: InkWell(
+                            onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => NicotineAndSugar(),
                               ),
-
+                            ), // needed
+                            child: Image.asset(
+                              "images/laboratorio.jpg",
+                              width: 100,
+                              height: 100,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
                         ),
-
                         ClipRRect(
                           borderRadius: BorderRadius.circular(10),
                           child: Image.asset(
@@ -108,14 +101,10 @@ class _HomeState extends State<Home> {
                       children: [
                         Text(
                           '      Quality2',
-
                         ),
-
                         Text(
                           'Produto Acabado',
-
                         ),
-
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(0, 0, 17, 0),
                           child: Text(
@@ -134,11 +123,3 @@ class _HomeState extends State<Home> {
     );
   }
 }
-
-
-
-
-
-
-
-

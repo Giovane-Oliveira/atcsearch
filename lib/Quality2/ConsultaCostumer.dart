@@ -1,14 +1,13 @@
 
 import 'dart:ui';
 
-import 'package:atcsearch/Grade.dart';
-import 'package:atcsearch/Home.dart';
+import '../Grade.dart';
+import '../NicotineAndSugar.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:async';
 
-import 'ListViewQuality.dart';
 
 class ConsultaCostumer extends StatefulWidget {
   @override
@@ -35,6 +34,10 @@ class _ConsultaCostumerState extends State<ConsultaCostumer> {
     if(!grade.text.isEmpty && !safra.text.isEmpty){
 
      url = "http://192.168.200.11/read.php?tipo=grade&grade=" + grade.text + "&safra=" + safra.text;
+
+    }else if(!grade.text.isEmpty){
+
+      url = "http://192.168.200.11/read.php?tipo=grade&grade=" + grade.text;
 
     }
 
@@ -66,7 +69,7 @@ class _ConsultaCostumerState extends State<ConsultaCostumer> {
           mainAxisSize: MainAxisSize.max,
           children: [
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0, 10, 16, 0),
+              padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -196,14 +199,14 @@ class _ConsultaCostumerState extends State<ConsultaCostumer> {
                                 Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(
-                                    builder: (context) => ListViewQuality(valor: post.cod_grade.toString(), valor1: post.des_grade, valor2: post.crop.toString(),)
+                                    builder: (context) => NicotineAndSugar(valor: post.cod_grade.toString(), valor1: post.des_grade, valor2: post.crop.toString(),)
                                 )
                                 );
 
                               },
 
                                 title: new Center(child: new Text("COD_GRADE: " + post.cod_grade.toString(),)),
-                                subtitle:  new Center(child: new Text("SAFRA:" + post.crop.toString() +"\n GRADE: " + post.des_grade + "\n COD_CLIENTE: "
+                                subtitle:  new Center(child: new Text("GRADE: " + post.des_grade +"\n SAFRA: " + post.crop.toString() + "\n COD_CLIENTE: "
                                   + post.cod_cliente.toString() + "\n SAMPLE: " + post.sample, textAlign: TextAlign.center)),
                                 /* title: Text( "Empresa: " + post.cod_empresa.toString() ),
                                   subtitle: Text("Carga: " + post.cod_carga.toString() + "\n Teste: 001" + "\n teste" + "\n teste"),*/
