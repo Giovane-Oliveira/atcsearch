@@ -1,6 +1,6 @@
 
 import 'dart:ui';
-
+import 'package:intl/intl.dart';
 import 'package:atcsearch/Quality2/Grade.dart';
 import 'package:atcsearch/Quality2/NicotineAndSugar.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +26,11 @@ class _ConsultaCostumerState extends State<ConsultaCostumer> {
     super.initState();
     grade = TextEditingController();
     safra = TextEditingController();
+
+    final DateTime now = DateTime.now();
+    final DateFormat formatter = DateFormat('yyyy');
+    final String formatted = formatter.format(now);
+    safra.text = formatted.toString();
 
   }
   Future<List<Grade>> _recuperarPostagens() async {

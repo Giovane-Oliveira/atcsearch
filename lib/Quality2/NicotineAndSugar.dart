@@ -1,5 +1,5 @@
 import 'dart:ui';
-
+import 'package:intl/intl.dart';
 import 'package:atcsearch/Post.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -27,7 +27,14 @@ class _NicotineAndSugarState extends State<NicotineAndSugar> {
     super.initState();
     safra = TextEditingController();
     grade = TextEditingController();
-    // safra.text = "2022";
+
+      final DateTime now = DateTime.now();
+      final DateFormat formatter = DateFormat('yyyy');
+      final String formatted = formatter.format(now);
+      safra.text = formatted.toString();
+      grade.text = "0000";
+
+
     setState(() {
       if (widget.valor != null) {
         grade.text = "${widget.valor}";
@@ -36,7 +43,7 @@ class _NicotineAndSugarState extends State<NicotineAndSugar> {
         //Consultar banco de dados
 
       } else {
-        widget.valor1 = "Clique duas vezes na caixa de texto";
+        widget.valor1 = "Clique no botão para inserir os dados";
       }
     });
   }
@@ -102,13 +109,13 @@ class _NicotineAndSugarState extends State<NicotineAndSugar> {
               Expanded(
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(2, 0, 5, 0),
-                  child: GestureDetector(
                     child: TextFormField(
                       readOnly: true,
                       controller: grade,
                       obscureText: false,
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
+                        prefix: Text("Grade:"),
                         isDense: true,
                         hintText: 'Grade',
                         enabledBorder: OutlineInputBorder(
@@ -129,13 +136,6 @@ class _NicotineAndSugarState extends State<NicotineAndSugar> {
                       textAlign: TextAlign.center,
                       cursorColor: Colors.black,
                     ),
-                    onDoubleTap: () => Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => ConsultaCostumer(),
-                      ),
-                    ),
-                  ),
                 ),
               ),
               /*  Expanded(
@@ -179,12 +179,13 @@ class _NicotineAndSugarState extends State<NicotineAndSugar> {
               Expanded(
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(5, 0, 0, 0),
-                  child: GestureDetector(
                     child: TextFormField(
+                      readOnly: true,
                       controller: safra,
                       obscureText: false,
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
+                        prefix: Text("Safra:"),
                         isDense: true,
                         hintText: 'Safra',
                         enabledBorder: OutlineInputBorder(
@@ -205,13 +206,6 @@ class _NicotineAndSugarState extends State<NicotineAndSugar> {
                       textAlign: TextAlign.center,
                       cursorColor: Colors.black,
                     ),
-                    onDoubleTap: () => Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => ConsultaCostumer(),
-                      ),
-                    ),
-                  ),
                 ),
               ),
             ],
@@ -224,9 +218,17 @@ class _NicotineAndSugarState extends State<NicotineAndSugar> {
           children: <Widget>[
             ElevatedButton.icon(
               onPressed: () {
-                setState(() {
+
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                    builder: (_) => ConsultaCostumer(),
+                ),
+                );
+
+                /*setState(() {
                   _myData = _recuperarPostagens(0);
-                });
+                });*/
                 // Respond to button press
               },
               style: ElevatedButton.styleFrom(
