@@ -205,8 +205,26 @@ class _ConsultaCostumerState extends State<ConsultaCostumer> {
                                 child: new Text(
                               "COD.GRADE: " + post.cod_grade.toString(),
                             )),
-                            subtitle: new Center(
-                                child: new Text(
+                            subtitle:
+                              Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                Text("GRADE: " + post.des_grade, style: const TextStyle(fontWeight: FontWeight.bold)),
+                                Text("SAFRA: " +
+                                    post.crop.toString() +
+                                    "\n COD.CLIENTE: " +
+                                    post.cod_cliente.toString() +
+                                    "\n SAMPLE: " +
+                                    post.sample,
+                                    textAlign: TextAlign.center)
+                              ]
+
+                              ),
+
+
+                          /*new Text(
                                     "GRADE: " +
                                         post.des_grade +
                                         "\n SAFRA: " +
@@ -215,9 +233,10 @@ class _ConsultaCostumerState extends State<ConsultaCostumer> {
                                         post.cod_cliente.toString() +
                                         "\n SAMPLE: " +
                                         post.sample,
-                                    textAlign: TextAlign.center)),
+                                    textAlign: TextAlign.center))*/
                             /* title: Text( "Empresa: " + post.cod_empresa.toString() ),
                                   subtitle: Text("Carga: " + post.cod_carga.toString() + "\n Teste: 001" + "\n teste" + "\n teste"),*/
+
                           );
                         },
                         separatorBuilder: (BuildContext context, int index) {
