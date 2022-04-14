@@ -39,11 +39,14 @@ class _NicotineAndSugarState extends State<NicotineAndSugar> {
       if (widget.valor != null) {
         grade.text = "${widget.valor}";
         safra.text = "${widget.valor2}";
+        //VALOR = COD_GRADE
+//VALOR1 = DES_GRADE
+      //VALOR2 = SAFRA
 
         //Consultar banco de dados
 
       } else {
-        widget.valor1 = "Clique no botão para inserir os dados";
+        widget.valor1 = "0000";
       }
     });
   }
@@ -92,7 +95,7 @@ class _NicotineAndSugarState extends State<NicotineAndSugar> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  "Grade: ${widget.valor1}",
+                  "Codigo: " + grade.text + " Safra: " + safra.text,
                   style: TextStyle(
                     fontSize: 15,
                   ),
@@ -100,41 +103,26 @@ class _NicotineAndSugarState extends State<NicotineAndSugar> {
               ]),
         ),
         Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 0),
+          padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
           child: Row(
             mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(2, 0, 5, 0),
-                    child: TextFormField(
-                      readOnly: true,
-                      controller: grade,
-                      obscureText: false,
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
-                        prefix: Text("Grade:"),
-                        isDense: true,
-                        hintText: 'Grade',
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.black,
-                            width: 1,
-                          ),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.black,
-                            width: 1,
-                          ),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                    child: Text(
+
+                      "Grade: ${widget.valor1}",
+                      style: TextStyle(
+                          fontSize: 30,
+                        foreground: Paint()
+                          ..style = PaintingStyle.stroke
+                          ..strokeWidth = 2
+                          ..color = Colors.black,
                       ),
-                      textAlign: TextAlign.center,
-                      cursorColor: Colors.black,
+
                     ),
                 ),
               ),
@@ -176,38 +164,7 @@ class _NicotineAndSugarState extends State<NicotineAndSugar> {
                    ),*/
                   ),
                   ),*/
-              Expanded(
-                child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(5, 0, 0, 0),
-                    child: TextFormField(
-                      readOnly: true,
-                      controller: safra,
-                      obscureText: false,
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
-                        prefix: Text("Safra:"),
-                        isDense: true,
-                        hintText: 'Safra',
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.black,
-                            width: 1,
-                          ),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.black,
-                            width: 1,
-                          ),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      textAlign: TextAlign.center,
-                      cursorColor: Colors.black,
-                    ),
-                ),
-              ),
+
             ],
           ),
         ),

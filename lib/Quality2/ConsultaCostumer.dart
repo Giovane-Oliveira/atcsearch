@@ -9,6 +9,7 @@ import 'dart:convert';
 import 'dart:async';
 
 
+
 class ConsultaCostumer extends StatefulWidget {
   @override
   _ConsultaCostumerState createState() => _ConsultaCostumerState();
@@ -26,12 +27,13 @@ class _ConsultaCostumerState extends State<ConsultaCostumer> {
     super.initState();
     grade = TextEditingController();
     safra = TextEditingController();
+    grade.addListener(() {_recuperarPostagens();});
 
     final DateTime now = DateTime.now();
     final DateFormat formatter = DateFormat('yyyy');
     final String formatted = formatter.format(now);
     safra.text = formatted.toString();
-
+    grade.text = "";
   }
   Future<List<Grade>> _recuperarPostagens() async {
     String url =  "http://192.168.200.11/read.php?tipo=grade";
@@ -65,6 +67,7 @@ class _ConsultaCostumerState extends State<ConsultaCostumer> {
     return postagens;
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -88,12 +91,18 @@ class _ConsultaCostumerState extends State<ConsultaCostumer> {
                     child: Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(2, 0, 5, 0),
                       child: TextFormField(
+                        onChanged: (teste) {
+                          setState(() {
+                            _myData = _recuperarPostagens();
+                          });
+                        },
                         controller: grade,
                         obscureText: false,
                         keyboardType:  TextInputType.number,
                         decoration: InputDecoration(
+                          prefix: Text("Grade: "),
                           isDense: true,
-                          hintText: 'Grade',
+                          hintText: 'Insira o código',
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                               color: Colors.black,
@@ -109,7 +118,7 @@ class _ConsultaCostumerState extends State<ConsultaCostumer> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                         ),
-                        textAlign: TextAlign.center,
+                        textAlign: TextAlign.left,
                       ),
                     ),
                   ),
@@ -122,8 +131,9 @@ class _ConsultaCostumerState extends State<ConsultaCostumer> {
                         obscureText: false,
                         keyboardType:  TextInputType.number,
                         decoration: InputDecoration(
+                          prefix: Text("Safra:"),
                           isDense: true,
-                          hintText: 'Safra',
+                          hintText: 'Insira o ano',
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                               color: Colors.black,
@@ -214,8 +224,8 @@ class _ConsultaCostumerState extends State<ConsultaCostumer> {
 
                               },
 
-                                title: new Center(child: new Text("COD_GRADE: " + post.cod_grade.toString(),)),
-                                subtitle:  new Center(child: new Text("GRADE: " + post.des_grade +"\n SAFRA: " + post.crop.toString() + "\n COD_CLIENTE: "
+                                title: new Center(child: new Text("COD.GRADE: " + post.cod_grade.toString(),)),
+                                subtitle:  new Center(child: new Text("GRADE: " + post.des_grade +"\n SAFRA: " + post.crop.toString() + "\n COD.CLIENTE: "
                                   + post.cod_cliente.toString() + "\n SAMPLE: " + post.sample, textAlign: TextAlign.center)),
                                 /* title: Text( "Empresa: " + post.cod_empresa.toString() ),
                                   subtitle: Text("Carga: " + post.cod_carga.toString() + "\n Teste: 001" + "\n teste" + "\n teste"),*/
