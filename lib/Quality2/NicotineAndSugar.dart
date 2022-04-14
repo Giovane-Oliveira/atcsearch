@@ -116,7 +116,7 @@ class _NicotineAndSugarState extends State<NicotineAndSugar> {
 
                       "Grade: ${widget.valor1}",
                       style: TextStyle(
-                          fontSize: 30,
+                          fontSize: 20,
                         foreground: Paint()
                           ..style = PaintingStyle.stroke
                           ..strokeWidth = 2
