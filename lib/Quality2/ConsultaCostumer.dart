@@ -88,11 +88,11 @@ class _ConsultaCostumerState extends State<ConsultaCostumer> {
                     },
                     controller: grade,
                     obscureText: false,
-                 //   keyboardType: TextInputType.number,
+                    //   keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                       prefix: Text("Grade: "),
                       isDense: true,
-                      hintText: 'Insira o código',
+                      hintText: 'Código',
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                           color: Colors.black,
@@ -205,26 +205,25 @@ class _ConsultaCostumerState extends State<ConsultaCostumer> {
                                 child: new Text(
                               "COD.GRADE: " + post.cod_grade.toString(),
                             )),
-                            subtitle:
-                              Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                Text("GRADE: " + post.des_grade, style: const TextStyle(fontWeight: FontWeight.bold)),
-                                Text("SAFRA: " +
-                                    post.crop.toString() +
-                                    "\n COD.CLIENTE: " +
-                                    post.cod_cliente.toString() +
-                                    "\n SAMPLE: " +
-                                    post.sample,
-                                    textAlign: TextAlign.center)
-                              ]
+                            subtitle: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text("GRADE: " + post.des_grade,
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.bold)),
+                                  Text(
+                                      "SAFRA: " +
+                                          post.crop.toString() +
+                                          "\n COD.CLIENTE: " +
+                                          post.cod_cliente.toString() +
+                                          "\n SAMPLE: " +
+                                          post.sample,
+                                      textAlign: TextAlign.center)
+                                ]),
 
-                              ),
-
-
-                          /*new Text(
+                            /*new Text(
                                     "GRADE: " +
                                         post.des_grade +
                                         "\n SAFRA: " +
@@ -236,7 +235,6 @@ class _ConsultaCostumerState extends State<ConsultaCostumer> {
                                     textAlign: TextAlign.center))*/
                             /* title: Text( "Empresa: " + post.cod_empresa.toString() ),
                                   subtitle: Text("Carga: " + post.cod_carga.toString() + "\n Teste: 001" + "\n teste" + "\n teste"),*/
-
                           );
                         },
                         separatorBuilder: (BuildContext context, int index) {
