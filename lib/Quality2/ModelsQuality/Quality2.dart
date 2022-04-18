@@ -50,16 +50,22 @@ class _Quality2State extends State<Quality2> {
                     children: [
                       Image.asset(
                         "images/NicotineAndSugar.jpg",
-                        height: 70,
-                        width: 100,
                         fit: BoxFit.cover,
+                        width: 50,
+                        height: 50,
                       ),
-                      Text(
-                        "Nicotine & Sugar",
-                        style: TextStyle(
-                          fontSize: 12,
+
+                      Container(
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                      child:  Text(
+                          "Nic. & Sugar",
+                          style: TextStyle(
+                            fontSize: 10,
+                          ),
                         ),
+
                       ),
+
                     ],
                   ),
                 ),
@@ -78,15 +84,19 @@ class _Quality2State extends State<Quality2> {
                     children: [
                       Image.asset(
                         "images/pesoamostra.jpg",
-                        height: 70,
-                        width: 100,
                         fit: BoxFit.cover,
+                        width: 50,
+                        height: 50,
                       ),
-                      Text(
-                        "Moisture",
-                        style: TextStyle(
-                          fontSize: 15,
+                      Container(
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                        child:  Text(
+                          "Moisture",
+                          style: TextStyle(
+                            fontSize: 10,
+                          ),
                         ),
+
                       ),
                     ],
                   ),
@@ -106,15 +116,19 @@ class _Quality2State extends State<Quality2> {
                     children: [
                       Image.asset(
                         "images/degradation.jpg",
-                        height: 70,
-                        width: 100,
                         fit: BoxFit.cover,
+                        width: 50,
+                        height: 50,
                       ),
-                      Text(
-                        "Degradation",
-                        style: TextStyle(
-                          fontSize: 15,
+                      Container(
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                        child:  Text(
+                          "Degradation",
+                          style: TextStyle(
+                            fontSize: 10,
+                          ),
                         ),
+
                       ),
                     ],
                   ),

@@ -53,15 +53,19 @@ class _HomeState extends State<Home> {
                     children: [
                       Image.asset(
                         "images/laboratorio.jpg",
-                        height: 70,
-                        width: 100,
                         fit: BoxFit.cover,
+                        width: 50,
+                        height: 50,
                       ),
-                      Text(
-                        "Quality2",
-                        style: TextStyle(
-                          fontSize: 15,
+                      Container(
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                        child:  Text(
+                          "Quality2",
+                          style: TextStyle(
+                            fontSize: 10,
+                          ),
                         ),
+
                       ),
                     ],
                   ),
@@ -81,15 +85,19 @@ class _HomeState extends State<Home> {
                     children: [
                       Image.asset(
                         "images/produtoacabado.jpg",
-                        height: 70,
-                        width: 100,
                         fit: BoxFit.cover,
+                        width: 50,
+                        height: 50,
                       ),
-                      Text(
-                        "P. Acabado",
-                        style: TextStyle(
-                          fontSize: 15,
+                      Container(
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                        child:  Text(
+                          "P. Acabado",
+                          style: TextStyle(
+                            fontSize: 10,
+                          ),
                         ),
+
                       ),
                     ],
                   ),
@@ -109,15 +117,19 @@ class _HomeState extends State<Home> {
                     children: [
                       Image.asset(
                         "images/fumocru.jpg",
-                        height: 70,
-                        width: 100,
                         fit: BoxFit.cover,
+                        width: 50,
+                        height: 50,
                       ),
-                      Text(
-                        "Fumo Cru",
-                        style: TextStyle(
-                          fontSize: 15,
+                      Container(
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                        child:  Text(
+                          "Fumo Cru",
+                          style: TextStyle(
+                            fontSize: 10,
+                          ),
                         ),
+
                       ),
                     ],
                   ),
