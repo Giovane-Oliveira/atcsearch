@@ -1,6 +1,6 @@
 import 'dart:ui';
 import 'package:intl/intl.dart';
-import 'package:atcsearch/Quality2/Post.dart';
+import 'package:atcsearch/Quality2/ModelsQuality/Post.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';

@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:atcsearch/Quality2/NicotineAndSugar.dart';
 import 'package:flutter/material.dart';
 
-import 'Quality2/Quality2.dart';
+import 'Quality2/ModelsQuality/Quality2.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -53,6 +53,8 @@ class _HomeState extends State<Home> {
                     children: [
                       Image.asset(
                         "images/laboratorio.jpg",
+                        height: 70,
+                        width: 100,
                         fit: BoxFit.cover,
                       ),
                       Text(
@@ -79,6 +81,8 @@ class _HomeState extends State<Home> {
                     children: [
                       Image.asset(
                         "images/produtoacabado.jpg",
+                        height: 70,
+                        width: 100,
                         fit: BoxFit.cover,
                       ),
                       Text(
@@ -105,6 +109,8 @@ class _HomeState extends State<Home> {
                     children: [
                       Image.asset(
                         "images/fumocru.jpg",
+                        height: 70,
+                        width: 100,
                         fit: BoxFit.cover,
                       ),
                       Text(

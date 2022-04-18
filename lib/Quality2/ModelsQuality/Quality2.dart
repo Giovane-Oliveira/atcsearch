@@ -49,7 +49,9 @@ class _Quality2State extends State<Quality2> {
                   child: Column(
                     children: [
                       Image.asset(
-                        "images/laboratorio.jpg",
+                        "images/NicotineAndSugar.jpg",
+                        height: 70,
+                        width: 100,
                         fit: BoxFit.cover,
                       ),
                       Text(
@@ -75,11 +77,13 @@ class _Quality2State extends State<Quality2> {
                   child: Column(
                     children: [
                       Image.asset(
-                        "images/produtoacabado.jpg",
+                        "images/pesoamostra.jpg",
+                        height: 70,
+                        width: 100,
                         fit: BoxFit.cover,
                       ),
                       Text(
-                        "P. Acabado",
+                        "Moisture",
                         style: TextStyle(
                           fontSize: 15,
                         ),
@@ -101,11 +105,13 @@ class _Quality2State extends State<Quality2> {
                   child: Column(
                     children: [
                       Image.asset(
-                        "images/fumocru.jpg",
+                        "images/degradation.jpg",
+                        height: 70,
+                        width: 100,
                         fit: BoxFit.cover,
                       ),
                       Text(
-                        "Fumo Cru",
+                        "Degradation",
                         style: TextStyle(
                           fontSize: 15,
                         ),
