@@ -1,6 +1,6 @@
 import 'dart:ui';
 import 'package:intl/intl.dart';
-import 'package:atcsearch/Post.dart';
+import 'package:atcsearch/Quality2/Post.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -119,7 +119,7 @@ class _NicotineAndSugarState extends State<NicotineAndSugar> {
                           fontSize: 20,
                         foreground: Paint()
                           ..style = PaintingStyle.stroke
-                          ..strokeWidth = 2
+                          ..strokeWidth = 1.5
                           ..color = Colors.black,
                       ),
 
@@ -272,22 +272,22 @@ class _NicotineAndSugarState extends State<NicotineAndSugar> {
                               ),*/
 
                                   DataCell(
-                                    Text(emp.umidade.toString()),
+                                    Text((double.parse(emp.umidade.toString()).toStringAsFixed(2)).toString()),
                                   ),
                                   DataCell(
-                                    Text(emp.peso_amostra.toString()),
+                                    Text((double.parse(emp.peso_amostra.toString()).toStringAsFixed(3)).toString()),
                                   ),
                                   DataCell(
-                                    Text(emp.leitura_nicotina.toString()),
+                                    Text((double.parse(emp.leitura_nicotina.toString()).toStringAsFixed(4)).toString()),
                                   ),
                                   DataCell(
-                                    Text(emp.leitura_acucar.toString()),
+                                    Text((double.parse(emp.leitura_acucar.toString()).toStringAsFixed(2)).toString()),
                                   ),
                                   DataCell(
-                                    Text(emp.result_nicotina.toString()),
+                                    Text((double.parse(emp.result_nicotina.toString()).toStringAsFixed(2)).toString()),
                                   ),
                                   DataCell(
-                                    Text(emp.result_acucar.toString()),
+                                    Text((double.parse(emp.result_acucar.toString()).toStringAsFixed(2)).toString()),
                                   ),
                                   /*  DataCell(
                                 Text(emp.des_grade.toString()),

@@ -3,22 +3,19 @@ import 'dart:ui';
 import 'package:atcsearch/Quality2/NicotineAndSugar.dart';
 import 'package:flutter/material.dart';
 
-import 'Quality2/Quality2.dart';
-
-class Home extends StatefulWidget {
+class Quality2 extends StatefulWidget {
   @override
-  _HomeState createState() => _HomeState();
+  _Quality2State createState() => _Quality2State();
 }
 
-class _HomeState extends State<Home> {
+class _Quality2State extends State<Quality2> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xFF040404),
-        automaticallyImplyLeading: false,
         title: Text(
-          'ATC Search',
+          'Quality2',
           textAlign: TextAlign.center,
           style: TextStyle(
             fontFamily: 'Poppins',
@@ -46,7 +43,7 @@ class _HomeState extends State<Home> {
                   onTap: () => Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => Quality2(),
+                      builder: (_) => NicotineAndSugar(),
                     ),
                   ),
                   child: Column(
@@ -56,9 +53,9 @@ class _HomeState extends State<Home> {
                         fit: BoxFit.cover,
                       ),
                       Text(
-                        "Quality2",
+                        "Nicotine & Sugar",
                         style: TextStyle(
-                          fontSize: 15,
+                          fontSize: 12,
                         ),
                       ),
                     ],
