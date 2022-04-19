@@ -40,102 +40,86 @@ class _HomeState extends State<Home> {
             mainAxisSpacing: 4,
             crossAxisCount: 3,
             children: [
-              Container(
-                padding: const EdgeInsets.all(20),
-                child: InkWell(
-                  onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => Quality2(),
+              Card(
+                color: Colors.white,
+                child: Center(
+                  child: InkWell(
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => Quality2(),
+                      ),
                     ),
-                  ),
-                  child: Column(
-                    children: [
-                      Image.asset(
-                        "images/laboratorio.jpg",
-                        fit: BoxFit.cover,
-                        width: 50,
-                        height: 50,
-                      ),
-                      Container(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
-                        child:  Text(
-                          "Quality2",
-                          style: TextStyle(
-                            fontSize: 10,
-                          ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.assessment_rounded,
+                          size: 80.0,
                         ),
-
-                      ),
-                    ],
+                        Text("Quality2"),
+                      ],
+                    ),
                   ),
                 ),
-                color: Colors.white,
               ),
-              Container(
-                padding: const EdgeInsets.all(20),
-              /*  child: InkWell(
-                  onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => NicotineAndSugar(),
-                    ),
-                  ),*/
-                  child: Column(
-                    children: [
-                      Image.asset(
-                        "images/produtoacabado.jpg",
-                        fit: BoxFit.cover,
-                        width: 50,
-                        height: 50,
-                      ),
-                      Container(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
-                        child:  Text(
-                          "P. Acabado",
-                          style: TextStyle(
-                            fontSize: 10,
-                          ),
-                        ),
 
-                      ),
-                    ],
-                  ),
-               // ),
+              Card(
                 color: Colors.white,
-              ),
-              Container(
-                padding: const EdgeInsets.all(20),
-               /* child: InkWell(
-                  onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => NicotineAndSugar(),
-                    ),
-                  ),*/
-                  child: Column(
-                    children: [
-                      Image.asset(
-                        "images/fumocru.jpg",
-                        fit: BoxFit.cover,
-                        width: 50,
-                        height: 50,
+                child: Center(
+                /*  child: InkWell(
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => Quality2(),
                       ),
-                      Container(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
-                        child:  Text(
-                          "Fumo Cru",
-                          style: TextStyle(
-                            fontSize: 10,
-                          ),
-                        ),
+                    ),*/
+                    child: Column(
 
-                      ),
-                    ],
-                  ),
-               // ),
-                color: Colors.white,
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+
+                        Icon( Icons.backpack_outlined, size:80.0),
+                        Text("P. Acabado"),
+
+                      ],
+                    ),
+                 // ),
+                ),
+
               ),
+
+
+              Card(
+                color: Colors.white,
+                child: Center(
+                  /*child: InkWell(
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => Quality2(),
+                      ),
+                    ),*/
+                    child: Column(
+
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+
+                        Icon( Icons.agriculture, size:80.0,),
+                        Text("Fumo Cru"),
+
+                      ],
+                    ),
+                  //),
+                ),
+
+              ),
+
+
+
             ],
           ),
         ),

@@ -37,104 +37,87 @@ class _Quality2State extends State<Quality2> {
             mainAxisSpacing: 4,
             crossAxisCount: 3,
             children: [
-              Container(
-                padding: const EdgeInsets.all(20),
-                child: InkWell(
-                  onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => NicotineAndSugar(),
-                    ),
-                  ),
-                  child: Column(
-                    children: [
-                      Image.asset(
-                        "images/NicotineAndSugar.jpg",
-                        fit: BoxFit.cover,
-                        width: 50,
-                        height: 50,
-                      ),
 
-                      Container(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
-                      child:  Text(
-                          "Nic. & Sugar",
-                          style: TextStyle(
-                            fontSize: 10,
-                          ),
-                        ),
-
-                      ),
-
-                    ],
+          Card(
+            color: Colors.white,
+            child: Center(
+              child: InkWell(
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => NicotineAndSugar(),
                   ),
                 ),
-                color: Colors.white,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.graphic_eq_rounded,
+                      size: 80.0,
+                    ),
+                    Text("Nic & Sugar"),
+                  ],
+                ),
               ),
-              Container(
-                padding: const EdgeInsets.all(20),
+            ),
+          ),
+
+          Card(
+            color: Colors.white,
+            child: Center(
               /*  child: InkWell(
-                  onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => NicotineAndSugar(),
-                    ),
-                  ),*/
-                  child: Column(
-                    children: [
-                      Image.asset(
-                        "images/pesoamostra.jpg",
-                        fit: BoxFit.cover,
-                        width: 50,
-                        height: 50,
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => Quality2(),
                       ),
-                      Container(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
-                        child:  Text(
-                          "Moisture",
-                          style: TextStyle(
-                            fontSize: 10,
-                          ),
-                        ),
+                    ),*/
+              child: Column(
 
-                      ),
-                    ],
-                  ),
-               // ),
-                color: Colors.white,
-              ),
-              Container(
-                padding: const EdgeInsets.all(20),
-               /* child: InkWell(
-                  onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => NicotineAndSugar(),
-                    ),
-                  ),*/
-                  child: Column(
-                    children: [
-                      Image.asset(
-                        "images/degradation.jpg",
-                        fit: BoxFit.cover,
-                        width: 50,
-                        height: 50,
-                      ),
-                      Container(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
-                        child:  Text(
-                          "Degradation",
-                          style: TextStyle(
-                            fontSize: 10,
-                          ),
-                        ),
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
 
-                      ),
-                    ],
-                  ),
-               // ),
-                color: Colors.white,
+                  Icon( Icons.workspaces_filled, size:80.0),
+                  Text("Moisture"),
+
+                ],
               ),
+              // ),
+            ),
+
+          ),
+
+
+          Card(
+            color: Colors.white,
+            child: Center(
+              /*child: InkWell(
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => Quality2(),
+                      ),
+                    ),*/
+              child: Column(
+
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+
+                  Icon( Icons.waterfall_chart, size:80.0,),
+                  Text("Degradation"),
+
+                ],
+              ),
+              //),
+            ),
+
+          ),
+
+
+
             ],
           ),
         ),
