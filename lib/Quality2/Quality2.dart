@@ -2,6 +2,25 @@ import 'dart:ui';
 
 import 'package:atcsearch/Quality2/NicotineAndSugar.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttericon/brandico_icons.dart';
+import 'package:fluttericon/elusive_icons.dart';
+import 'package:fluttericon/entypo_icons.dart';
+import 'package:fluttericon/font_awesome5_icons.dart';
+import 'package:fluttericon/font_awesome_icons.dart';
+import 'package:fluttericon/fontelico_icons.dart';
+import 'package:fluttericon/iconic_icons.dart';
+import 'package:fluttericon/linearicons_free_icons.dart';
+import 'package:fluttericon/linecons_icons.dart';
+import 'package:fluttericon/maki_icons.dart';
+import 'package:fluttericon/meteocons_icons.dart';
+import 'package:fluttericon/mfg_labs_icons.dart';
+import 'package:fluttericon/modern_pictograms_icons.dart';
+import 'package:fluttericon/octicons_icons.dart';
+import 'package:fluttericon/rpg_awesome_icons.dart';
+import 'package:fluttericon/typicons_icons.dart';
+import 'package:fluttericon/web_symbols_icons.dart';
+import 'package:fluttericon/zocial_icons.dart';
+//https://www.fluttericon.com/
 
 class Quality2 extends StatefulWidget {
   @override
@@ -53,7 +72,7 @@ class _Quality2State extends State<Quality2> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Icon(
-                      Icons.graphic_eq_rounded,
+                      FontAwesome.beaker,
                       size: 80.0,
                     ),
                     Text("Nic & Sugar"),
@@ -79,7 +98,7 @@ class _Quality2State extends State<Quality2> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
 
-                  Icon( Icons.workspaces_filled, size:80.0),
+                  Icon( Typicons.temperatire, size:80.0),
                   Text("Moisture"),
 
                 ],

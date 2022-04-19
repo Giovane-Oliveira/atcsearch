@@ -1,6 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'Quality2/ModelsQuality/Quality2.dart';
+import 'Quality2/Quality2.dart';
 
 import 'package:fluttericon/brandico_icons.dart';
 import 'package:fluttericon/elusive_icons.dart';
@@ -100,7 +100,7 @@ class _HomeState extends State<Home> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
 
-                        Icon( Icons.backpack_outlined, size:80.0),
+                        Icon( Octicons.package, size:80.0),
                         Text("P. Acabado"),
 
                       ],
