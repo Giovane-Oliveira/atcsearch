@@ -1,8 +1,5 @@
 import 'dart:ui';
-
-import 'package:atcsearch/Quality2/NicotineAndSugar.dart';
 import 'package:flutter/material.dart';
-
 import 'Quality2/ModelsQuality/Quality2.dart';
 
 class Home extends StatefulWidget {
