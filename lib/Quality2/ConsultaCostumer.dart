@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:atcsearch/Quality2/Degradation.dart';
 import 'package:atcsearch/Quality2/Moinsture.dart';
 import 'package:intl/intl.dart';
 import 'package:atcsearch/Quality2/ModelsQuality/ModelNS.dart';
@@ -71,7 +72,7 @@ class _ConsultaCostumerState extends State<ConsultaCostumer> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Search Customer"),
+        title: Text("Search Grade"),
         backgroundColor: Colors.black,
       ),
       body: Column(mainAxisSize: MainAxisSize.max, children: [
@@ -213,6 +214,17 @@ class _ConsultaCostumerState extends State<ConsultaCostumer> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => Moinsture(
+                                          valor: post.cod_grade.toString(),
+                                          valor1: post.des_grade,
+                                          valor2: post.crop.toString(),
+                                        )));
+
+                              }else if(widget.interface.toString() == "Degradation"){
+
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Degradation(
                                           valor: post.cod_grade.toString(),
                                           valor1: post.des_grade,
                                           valor2: post.crop.toString(),
