@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:atcsearch/Quality2/NicotineAndSugar.dart';
+import 'package:atcsearch/Quality2/Moinsture.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/brandico_icons.dart';
 import 'package:fluttericon/elusive_icons.dart';
@@ -85,13 +86,13 @@ class _Quality2State extends State<Quality2> {
           Card(
             color: Colors.white,
             child: Center(
-              /*  child: InkWell(
+                child: InkWell(
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => Quality2(),
+                        builder: (_) => Moinsture(),
                       ),
-                    ),*/
+                    ),
               child: Column(
 
                 mainAxisSize: MainAxisSize.min,
@@ -103,7 +104,7 @@ class _Quality2State extends State<Quality2> {
 
                 ],
               ),
-              // ),
+               ),
             ),
 
           ),

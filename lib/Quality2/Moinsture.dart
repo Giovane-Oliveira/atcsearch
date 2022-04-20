@@ -1,6 +1,6 @@
 import 'dart:ui';
 import 'package:intl/intl.dart';
-import 'package:atcsearch/Quality2/ModelsQuality/ModelCC.dart';
+import 'package:atcsearch/Quality2/ModelsQuality/ModelMoisture.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -8,17 +8,17 @@ import 'dart:async';
 
 import 'package:atcsearch/Quality2/ConsultaCostumer.dart';
 
-class NicotineAndSugar extends StatefulWidget {
+class Moinsture extends StatefulWidget {
   String? valor, valor1, valor2;
 
-  NicotineAndSugar({this.valor, this.valor1, this.valor2});
+  Moinsture({this.valor, this.valor1, this.valor2});
 
   @override
-  _NicotineAndSugarState createState() => _NicotineAndSugarState();
+  _MoinstureState createState() => _MoinstureState();
 }
 
-class _NicotineAndSugarState extends State<NicotineAndSugar> {
-  late Future<List<Post>> _myData = _recuperarPostagens(0);
+class _MoinstureState extends State<Moinsture> {
+  late Future<List<ModelMoisture>> _myData = _recuperarPostagens(0);
   late TextEditingController safra;
   late TextEditingController grade;
 
@@ -51,27 +51,49 @@ class _NicotineAndSugarState extends State<NicotineAndSugar> {
     });
   }
 
-  Future<List<Post>> _recuperarPostagens(int n) async {
-    String url = "http://192.168.200.11/read.php?tipo=consultar&safra=" +
+  Future<List<ModelMoisture>> _recuperarPostagens(int n) async {
+    String url = "http://192.168.200.11/read.php?tipo=moinsture&safra=" +
         safra.text +
         "&grade=" +
         grade.text;
     http.Response response;
     response = await http.get(Uri.parse(url));
     var dadosJson = json.decode(response.body);
-    List<Post> postagens = <Post>[];
+    List<ModelMoisture> postagens = <ModelMoisture>[];
     for (var post in dadosJson) {
       // print("post: " + post["cod_carga"] );
-      Post p = Post(
-          post["data_processo"],
-          post["box_inicial"],
-          post["box_final"],
-          post["umidade"],
-          post["peso_amostra"],
-          post["leitura_nicotina"],
-          post["leitura_acucar"],
-          post["result_nicotina"],
-          post["result_acucar"]);
+      ModelMoisture p = ModelMoisture(
+          post["sampledate"],
+          post["shift"],
+          post["box"],
+          post["sampletime"],
+          post["casefirst"],
+          post["caselast"],
+          post["blending"],
+          post["brabender"],
+          post["oven"],
+          post["coolerr"],
+          post["coolerl"],
+          post["bthresh"],
+          post["stem"],
+          post["tips"],
+          post["ptemp"],
+          post["out_crop"],
+          post["des_grade"],
+          post["method"],
+          post["product"],
+          post["pm1"],
+          post["pm2"],
+          post["pm3"],
+          post["pm4"],
+          post["pm5"],
+          post["pm6"],
+          post["pm7"],
+          post["pm8"],
+          post["pm9"],
+          post["pm10"],
+          post["pm11"],
+          post["pm12"]);
       postagens.add(p);
     }
     //print( postagens.toString() );
@@ -83,7 +105,7 @@ class _NicotineAndSugarState extends State<NicotineAndSugar> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Nicotine and Sugar"),
+        title: Text("Moinsture"),
         backgroundColor: Colors.black,
       ),
       body: Column(mainAxisSize: MainAxisSize.max, children: [
@@ -126,6 +148,8 @@ class _NicotineAndSugarState extends State<NicotineAndSugar> {
                     ),
                 ),
               ),
+
+
               /*  Expanded(
 
                     child: Padding(
@@ -168,6 +192,7 @@ class _NicotineAndSugarState extends State<NicotineAndSugar> {
             ],
           ),
         ),
+
         Row(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -176,12 +201,11 @@ class _NicotineAndSugarState extends State<NicotineAndSugar> {
             ElevatedButton.icon(
               onPressed: () {
 
-
                 Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
                         builder: (context) => ConsultaCostumer(
-                          interface: "NicotineAndSugar",
+                          interface: "Moinsture",
 
                         )));
 
@@ -205,8 +229,8 @@ class _NicotineAndSugarState extends State<NicotineAndSugar> {
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Column(children: [
-                FutureBuilder<List<Post>>(
-                  initialData: const <Post>[],
+                FutureBuilder<List<ModelMoisture>>(
+                  initialData: const <ModelMoisture>[],
                   future: _myData,
                   builder: (context, snapshot)
 
@@ -234,23 +258,37 @@ class _NicotineAndSugarState extends State<NicotineAndSugar> {
                           return DataTable(
                             columns: const [
                               // DataColumn(label: Text('COD_GRADE')),
-                              DataColumn(label: Text('Date')),
-                              DataColumn(label: Text('Case First')),
-                              DataColumn(label: Text('Case Last')),
-                              // DataColumn(label: Text('BOX_TOTAL')),
-                              DataColumn(label: Text('Moisture')),
-                              DataColumn(label: Text('Weight')),
-                              DataColumn(label: Text('Read Nicotine mg/mL')),
-                              DataColumn(label: Text('Read Sugar mg/mL')),
-                              DataColumn(label: Text('Result_Nicotine %')),
-                              DataColumn(label: Text('Result_Sugar %')),
-                              /*  DataColumn(label: Text('DES_GRADE')),
-                          DataColumn(label: Text('DES_PESSOA')),
-                          DataColumn(label: Text('USER_INSERCAO')),
-                          DataColumn(label: Text('DT_HR_INSERCAO')),
-                          DataColumn(label: Text('USER_ALTERACAO')),
-                          DataColumn(label: Text('DT_HR_INSERCAO')),
-                          DataColumn(label: Text('NIC_TIPO_CALCULO')),*/
+                              DataColumn(label: Text('Sampledate')),
+                              DataColumn(label: Text('Shift')),
+                              DataColumn(label: Text('Box')),
+                              DataColumn(label: Text('Sampletime')),
+                              DataColumn(label: Text('Casefirst')),
+                              DataColumn(label: Text('Caselast')),
+                              DataColumn(label: Text('Blending')),
+                              DataColumn(label: Text('Brabender')),
+                              DataColumn(label: Text('Oven')),
+                              DataColumn(label: Text('Coolerr')),
+                              DataColumn(label: Text('Coolerl')),
+                              DataColumn(label: Text('Bthresh')),
+                              DataColumn(label: Text('Stem')),
+                              DataColumn(label: Text('Tips')),
+                              DataColumn(label: Text('Ptemp')),
+                              DataColumn(label: Text('Out_crop')),
+                              DataColumn(label: Text('Des_grade')),
+                              DataColumn(label: Text('Method')),
+                              DataColumn(label: Text('Product')),
+                              DataColumn(label: Text('Pm1')),
+                              DataColumn(label: Text('Pm2')),
+                              DataColumn(label: Text('Pm3')),
+                              DataColumn(label: Text('Pm4')),
+                              DataColumn(label: Text('Pm5')),
+                              DataColumn(label: Text('Pm6')),
+                              DataColumn(label: Text('Pm7')),
+                              DataColumn(label: Text('Pm8')),
+                              DataColumn(label: Text('Pm9')),
+                              DataColumn(label: Text('Pm10')),
+                              DataColumn(label: Text('Pm11')),
+                              DataColumn(label: Text('Pm12')),
                             ],
                             rows: List.generate(
                               snapshot.data!.length,
@@ -261,58 +299,75 @@ class _NicotineAndSugarState extends State<NicotineAndSugar> {
                                 Text(emp.cod_grade.toString()),
                               ),*/
                                   DataCell(
-                                    Text(emp.data_processo.toString()),
+                                    Text(emp.sampledate.toString()),
                                   ),
                                   DataCell(
-                                    Text(emp.box_inicial.toString()),
+                                    Text(emp.shift.toString()),
                                   ),
                                   DataCell(
-                                    Text(emp.box_final.toString()),
+                                    Text(emp.box.toString()),
                                   ),
-                                  /* DataCell(
-                                Text(emp.box_total.toString()),
-                              ),*/
+                                   DataCell(
+                                Text(emp.sampletime.toString()),
+                                  ),
+                                  DataCell(
+                                    Text(emp.casefirst.toString()),
+                                  ),
+                                  DataCell(
+                                    Text(emp.caselast.toString()),
+                                  ), DataCell(
+                                    Text(emp.blending.toString()),
+                                  ), DataCell(
+                                    Text(emp.brabender.toString()),
+                                  ), DataCell(
+                                    Text(emp.oven.toString()),
+                                  ), DataCell(
+                                    Text(emp.coolerr.toString()),
+                                  ), DataCell(
+                                    Text(emp.coolerl.toString()),
+                                  ), DataCell(
+                                    Text(emp.bthresh.toString()),
+                                  ), DataCell(
+                                    Text(emp.stem.toString()),
+                                  ), DataCell(
+                                    Text(emp.tips.toString()),
+                                  ), DataCell(
+                                    Text(emp.ptemp.toString()),
+                                  ), DataCell(
+                                    Text(emp.out_crop.toString()),
+                                  ), DataCell(
+                                    Text(emp.des_grade.toString()),
+                                  ), DataCell(
+                                    Text(emp.method.toString()),
+                                  ),DataCell(
+                                    Text(emp.product.toString()),
+                                  ),DataCell(
+                                    Text(emp.pm1.toString()),
+                                  ),DataCell(
+                                    Text(emp.pm2.toString()),
+                                  ),DataCell(
+                                    Text(emp.pm3.toString()),
+                                  ),DataCell(
+                                    Text(emp.pm4.toString()),
+                                  ),DataCell(
+                                    Text(emp.pm5.toString()),
+                                  ),DataCell(
+                                    Text(emp.pm6.toString()),
+                                  ),DataCell(
+                                    Text(emp.pm7.toString()),
+                                  ),DataCell(
+                                    Text(emp.pm8.toString()),
+                                  ),DataCell(
+                                    Text(emp.pm9.toString()),
+                                  ),DataCell(
+                                    Text(emp.pm10.toString()),
+                                  ),DataCell(
+                                    Text(emp.pm11.toString()),
+                                  ),DataCell(
+                                    Text(emp.pm12.toString()),
+                                  ),
 
-                                  DataCell(
-                                    Text((double.parse(emp.umidade.toString()).toStringAsFixed(2)).toString()),
-                                  ),
-                                  DataCell(
-                                    Text((double.parse(emp.peso_amostra.toString()).toStringAsFixed(3)).toString()),
-                                  ),
-                                  DataCell(
-                                    Text((double.parse(emp.leitura_nicotina.toString()).toStringAsFixed(4)).toString()),
-                                  ),
-                                  DataCell(
-                                    Text((double.parse(emp.leitura_acucar.toString()).toStringAsFixed(2)).toString()),
-                                  ),
-                                  DataCell(
-                                    Text((double.parse(emp.result_nicotina.toString()).toStringAsFixed(2)).toString()),
-                                  ),
-                                  DataCell(
-                                    Text((double.parse(emp.result_acucar.toString()).toStringAsFixed(2)).toString()),
-                                  ),
-                                  /*  DataCell(
-                                Text(emp.des_grade.toString()),
-                              ),
-                              DataCell(
-                                Text(emp.des_pessoa.toString()),
-                              ),
-                              DataCell(
-                                Text(emp.user_insercao.toString()),
-                              ),
-                              DataCell(
-                                Text(emp.dt_hr_insercao.toString()),
-                              ),
 
-                              DataCell(
-                                Text(emp.dt_hr_insercao.toString()),
-                              ),
-                              DataCell(
-                                Text(emp.user_alteracao.toString()),
-                              ),
-                              DataCell(
-                                Text(emp.nic_tipo_calculo.toString()),
-                              ),*/
                                 ]);
                               },
                             ).toList(),

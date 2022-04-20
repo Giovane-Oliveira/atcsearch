@@ -1,6 +1,7 @@
 import 'dart:ui';
+import 'package:atcsearch/Quality2/Moinsture.dart';
 import 'package:intl/intl.dart';
-import 'package:atcsearch/Quality2/Grade.dart';
+import 'package:atcsearch/Quality2/ModelsQuality/ModelNS.dart';
 import 'package:atcsearch/Quality2/NicotineAndSugar.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -8,6 +9,10 @@ import 'dart:convert';
 import 'dart:async';
 
 class ConsultaCostumer extends StatefulWidget {
+  String? interface;
+
+  ConsultaCostumer({this.interface});
+
   @override
   _ConsultaCostumerState createState() => _ConsultaCostumerState();
 }
@@ -92,7 +97,7 @@ class _ConsultaCostumerState extends State<ConsultaCostumer> {
                     decoration: InputDecoration(
                       prefix: Text("Grade: "),
                       isDense: true,
-                      hintText: 'Código',
+                      hintText: 'Grade',
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                           color: Colors.black,
@@ -192,14 +197,30 @@ class _ConsultaCostumerState extends State<ConsultaCostumer> {
 
                           return ListTile(
                             onTap: () {
-                              Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => NicotineAndSugar(
-                                            valor: post.cod_grade.toString(),
-                                            valor1: post.des_grade,
-                                            valor2: post.crop.toString(),
-                                          )));
+                              if(widget.interface.toString() == "NicotineAndSugar"){
+
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => NicotineAndSugar(
+                                          valor: post.cod_grade.toString(),
+                                          valor1: post.des_grade,
+                                          valor2: post.crop.toString(),
+                                        )));
+                              }else if(widget.interface.toString() == "Moinsture"){
+
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Moinsture(
+                                          valor: post.cod_grade.toString(),
+                                          valor1: post.des_grade,
+                                          valor2: post.crop.toString(),
+                                        )));
+
+                              }
+
+
                             },
                             title: new Center(
                                 child: new Text(
