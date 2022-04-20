@@ -258,22 +258,22 @@ class _MoinstureState extends State<Moinsture> {
                           return DataTable(
                             columns: const [
                               // DataColumn(label: Text('COD_GRADE')),
-                              DataColumn(label: Text('Sampledate')),
+                              DataColumn(label: Text('Date')),
                               DataColumn(label: Text('Shift')),
-                              DataColumn(label: Text('Box')),
-                              DataColumn(label: Text('Sampletime')),
-                              DataColumn(label: Text('Casefirst')),
-                              DataColumn(label: Text('Caselast')),
+                              DataColumn(label: Text('Case')),
+                              DataColumn(label: Text('Time')),
+                           //   DataColumn(label: Text('Casefirst')),
+                            //  DataColumn(label: Text('Caselast')),
+                              DataColumn(label: Text('% Brabender')),
+                              DataColumn(label: Text('% Oven')),
+                              DataColumn(label: Text('Cooler R')),
+                              DataColumn(label: Text('Cooler L')),
                               DataColumn(label: Text('Blending')),
-                              DataColumn(label: Text('Brabender')),
-                              DataColumn(label: Text('Oven')),
-                              DataColumn(label: Text('Coolerr')),
-                              DataColumn(label: Text('Coolerl')),
                               DataColumn(label: Text('Bthresh')),
                               DataColumn(label: Text('Stem')),
                               DataColumn(label: Text('Tips')),
-                              DataColumn(label: Text('Ptemp')),
-                              DataColumn(label: Text('Out_crop')),
+                              DataColumn(label: Text('Packed Temp')),
+                             /* DataColumn(label: Text('Out_crop')),
                               DataColumn(label: Text('Des_grade')),
                               DataColumn(label: Text('Method')),
                               DataColumn(label: Text('Product')),
@@ -288,7 +288,7 @@ class _MoinstureState extends State<Moinsture> {
                               DataColumn(label: Text('Pm9')),
                               DataColumn(label: Text('Pm10')),
                               DataColumn(label: Text('Pm11')),
-                              DataColumn(label: Text('Pm12')),
+                              DataColumn(label: Text('Pm12')),*/
                             ],
                             rows: List.generate(
                               snapshot.data!.length,
@@ -310,30 +310,30 @@ class _MoinstureState extends State<Moinsture> {
                                    DataCell(
                                 Text(emp.sampletime.toString()),
                                   ),
-                                  DataCell(
+                                  /*DataCell(
                                     Text(emp.casefirst.toString()),
                                   ),
                                   DataCell(
                                     Text(emp.caselast.toString()),
+                                  ),*/ DataCell(
+                                    Text(double.parse(emp.brabender.toString()).toStringAsFixed(2)),
                                   ), DataCell(
-                                    Text(emp.blending.toString()),
+                                    Text(double.parse(emp.oven.toString()).toStringAsFixed(2)),
                                   ), DataCell(
-                                    Text(emp.brabender.toString()),
+                                    Text(double.parse(emp.coolerr.toString()).toStringAsFixed(2)),
                                   ), DataCell(
-                                    Text(emp.oven.toString()),
+                                    Text(double.parse(emp.coolerl.toString()).toStringAsFixed(2)),
                                   ), DataCell(
-                                    Text(emp.coolerr.toString()),
+                                    Text(double.parse(emp.blending.toString()).toStringAsFixed(2)),
                                   ), DataCell(
-                                    Text(emp.coolerl.toString()),
+                                    Text(double.parse(emp.bthresh.toString()).toStringAsFixed(2)),
                                   ), DataCell(
-                                    Text(emp.bthresh.toString()),
+                                    Text(double.parse(emp.stem.toString()).toStringAsFixed(2)),
                                   ), DataCell(
-                                    Text(emp.stem.toString()),
+                                    Text(double.parse(emp.tips.toString()).toStringAsFixed(2)),
                                   ), DataCell(
-                                    Text(emp.tips.toString()),
-                                  ), DataCell(
-                                    Text(emp.ptemp.toString()),
-                                  ), DataCell(
+                                    Text(double.parse(emp.ptemp.toString()).toStringAsFixed(2)),
+                                  ), /*DataCell(
                                     Text(emp.out_crop.toString()),
                                   ), DataCell(
                                     Text(emp.des_grade.toString()),
@@ -365,7 +365,7 @@ class _MoinstureState extends State<Moinsture> {
                                     Text(emp.pm11.toString()),
                                   ),DataCell(
                                     Text(emp.pm12.toString()),
-                                  ),
+                                  ),*/
 
 
                                 ]);
